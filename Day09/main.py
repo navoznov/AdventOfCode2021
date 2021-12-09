@@ -76,7 +76,6 @@ def get_basin_size(map, lowest_point):
     return len(neighbors) + 1
 
 
-basins = [get_basin_size(bordered_map, p) for p in lowest_points]
-basins = sorted(basins)
+basins = sorted([get_basin_size(bordered_map, p) for p in lowest_points])
 a, b, c = basins[-3:]
 print(a * b * c)
