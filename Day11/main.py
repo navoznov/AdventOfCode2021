@@ -1,11 +1,5 @@
-from os import stat
-
-lines = open("Day11/input.txt").read().split('\n')
-state = [[int(x) for x in line] for line in lines]
-
-
-def copy_state(state):
-    return [row[:] for row in state]
+def init_state(lines):
+    return [[int(x) for x in line] for line in lines]
 
 
 def get_deltas(map, x, y):
@@ -64,28 +58,28 @@ def make_step(state):
 
     return state, flash_count
 
-def print_state(state):
-    for row in state:
-        print("".join([str(x) for x in row]))
 
+lines = open("Day11/input.txt").read().split('\n')
+
+# part 1
+state = init_state(lines)
 flash_count = 0
 steps_count = 100
-print_state(state)
 for si in range(steps_count):
     state, fc = make_step(state)
     flash_count += fc
-    print()
-    print(f"After step {si}:")
-    print_state(state)
-    print(f"Flash count = {flash_count}")
-
-    # if si == 2-1:
-    #     assert(flash_count == 34)
-    # elif si == 3-1:
-    #     assert(flash_count == 34 + 44)
-    # elif si == 4-1:
-    #     assert(flash_count == 34 + 44 + 16)
-
 
 print(flash_count)
-pass
+
+# part 2
+state = init_state(lines)
+octopus_count = len(state) * len(state[0])
+step_counter = 0
+while True:
+    step_counter += 1
+    state, flash_count = make_step(state)
+
+    if flash_count == octopus_count:
+        break
+
+print(step_counter)
