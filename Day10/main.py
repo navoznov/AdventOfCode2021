@@ -1,4 +1,3 @@
-from typing import Counter
 import numpy as np
 
 lines = open("Day10/input.txt").read().split('\n')
